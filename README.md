@@ -1,17 +1,47 @@
-# mala_fats
+# Mala FATS (Fixed Asset Tracking System)
 
-A new Flutter project.
+A Flutter-based mobile application for managing and tracking fixed assets.
 
-## Getting Started
+## Overview
 
-This project is a starting point for a Flutter application.
+Mala FATS is a comprehensive asset management system that allows organizations to:
+- Track assets by location and custodian
+- Generate and verify asset tags
+- Manage asset information including brand, condition, and department
+- Handle asset verification workflows
+- Print asset barcodes
 
-A few resources to get you started if this is your first Flutter project:
+## Features
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Asset Management**
+  - Add new brands/manufacturers
+  - Track asset conditions
+  - Manage asset locations
+  - Handle asset verification
+  - Generate unique asset tags
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# FATS-Mala-Nartec
+- **Employee Management**
+  - Track assets by employee/custodian
+  - Manage employee information
+  - Department-wise asset tracking
+
+- **Location Tracking**
+  - Building and floor-wise asset tracking
+  - Area and region management
+  - Country and city-based organization
+
+- **Barcode System**
+  - Generate asset barcodes
+  - Scan and verify assets
+  - Print asset tags
+
+## Technical Stack
+
+- **Frontend**: Flutter
+- **State Management**: GetX
+- **API Integration**: HTTP package
+- **Local Storage**: Shared Preferences
+- **Image Handling**: Image Picker
+- **Data Format**: JSON
+
+## Project Structure
