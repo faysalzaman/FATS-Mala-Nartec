@@ -101,9 +101,9 @@ class _SendBarCodeScreenState extends State<SendBarCodeScreen> {
       Constant.showLoadingDialog(context);
       GetAllCategoriesServices.getAllCategories().then((value) async {
         setState(() {
-          selectCategory = value[0].subDescription.toString();
+          selectCategory = value[0].mainDescription.toString();
           for (var category in value) {
-            categoryList.add(category.subDescription ?? "");
+            categoryList.add(category.mainDescription ?? "");
             mCode.add(category.mainCategoryCode ?? "");
             sCode.add(category.subCategoryCode ?? "");
             majorDescription.add(category.mainDescription ?? "");
