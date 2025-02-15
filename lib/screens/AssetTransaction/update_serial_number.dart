@@ -592,6 +592,7 @@ class _UpdateSerialNumberState extends State<UpdateSerialNumber> {
                                       );
                                     } else {
                                       SaveTagServices.saveTag(
+                                        context,
                                         tblAssetMasterEncodeAssetCaptureID,
                                         majorCategory,
                                         majorCategoryDescription,

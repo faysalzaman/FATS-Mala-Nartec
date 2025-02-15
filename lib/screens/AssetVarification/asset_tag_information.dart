@@ -50,33 +50,37 @@ class _AssetTagInformationState extends State<AssetTagInformation> {
     super.initState();
     EmployeeNameIdServices.nameIDMethod().then((employees) {
       setState(() {
-        selectEmployeeName = employees[0].empName.toString();
-        _employeeIdController.text = employees[0].empID.toString();
-
-        for (var employee in employees) {
-          employeeNameList.add(employee.empName.toString());
-          employeeIdList.add(employee.empID.toString());
+        if (employees.isNotEmpty) {
+          employeeNameList =
+              employees.map((e) => e.empName.toString()).toSet().toList();
+          employeeIdList = employees.map((e) => e.empID.toString()).toList();
+          selectEmployeeName = employeeNameList.first;
+          _employeeIdController.text = employeeIdList.first;
         }
       });
     });
 
     AssetConditionServices.assetCondition().then((assetCondition) {
       setState(() {
-        selectAssetCondition =
-            assetCondition[0].tblConditionDescription.toString();
-        for (var asset in assetCondition) {
-          assetConditionList.add(asset.tblConditionDescription.toString());
+        if (assetCondition.isNotEmpty) {
+          assetConditionList = assetCondition
+              .map((e) => e.tblConditionDescription.toString())
+              .toSet()
+              .toList();
+          selectAssetCondition = assetConditionList.first;
         }
       });
     });
 
     BoughtServices.assetCondition().then((value) {
       setState(() {
-        selectBought = value[0].tblConditionDescriptionBought.toString();
-        for (var bought in value) {
-          boughtList.add(bought.tblConditionDescriptionBought.toString());
+        if (value.isNotEmpty) {
+          boughtList = value
+              .map((e) => e.tblConditionDescriptionBought.toString())
+              .toSet()
+              .toList();
+          selectBought = boughtList.first;
         }
-
         isLoading = false;
       });
     });
@@ -872,6 +876,7 @@ class _AssetTagInformationState extends State<AssetTagInformation> {
                                       );
                                     } else {
                                       SaveTagServices.saveTag(
+                                        context,
                                         tblAssetMasterEncodeAssetCaptureID,
                                         majorCategory,
                                         majorCategoryDescription,
@@ -916,35 +921,24 @@ class _AssetTagInformationState extends State<AssetTagInformation> {
                                         _assetLocationDetailsController.text
                                             .trim(),
                                         imagefiles!,
-                                      ).then((value) {
-                                        Navigator.pop(context);
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                            content: Text(
-                                              "Data Saved Successfully",
-                                              style: TextStyle(
-                                                color: Colors.white,
+                                      ).then((value) {}).onError(
+                                        (error, stackTrace) {
+                                          print(error);
+                                          Navigator.pop(context);
+                                          ScaffoldMessenger.of(context)
+                                              .showSnackBar(
+                                            const SnackBar(
+                                              content: Text(
+                                                "Error while saving data",
+                                                style: TextStyle(
+                                                  color: Colors.white,
+                                                ),
                                               ),
+                                              backgroundColor: Colors.red,
                                             ),
-                                            backgroundColor: Colors.green,
-                                          ),
-                                        );
-                                      }).onError((error, stackTrace) {
-                                        Navigator.pop(context);
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(
-                                          const SnackBar(
-                                            content: Text(
-                                              "Error while saving data",
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                            backgroundColor: Colors.red,
-                                          ),
-                                        );
-                                      });
+                                          );
+                                        },
+                                      );
                                     }
                                   },
                                   child: const Text('Save'),
@@ -975,15 +969,8 @@ class _AssetTagInformationState extends State<AssetTagInformation> {
     _notesController.dispose();
 
     employeeNameList.clear();
-
     assetConditionList.clear();
-    selectAssetCondition = "Select Asset Condition";
-    assetConditionList.insert(0, "Select Asset Condition");
-
     boughtList.clear();
-    selectBought = "Select Asset Bought";
-    boughtList.insert(0, "Select Asset Bought");
-
     imagefiles?.clear();
   }
 }

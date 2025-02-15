@@ -751,6 +751,7 @@ class _AssetsInventoryScreenState extends State<AssetsInventoryScreen> {
                                 );
                               } else {
                                 SaveTagServices.saveTag(
+                                  context,
                                   tblAssetMasterEncodeAssetCaptureID,
                                   majorCategory,
                                   majorCategoryDescription,

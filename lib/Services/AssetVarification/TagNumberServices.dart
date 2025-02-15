@@ -28,6 +28,8 @@ class TagNumberServices {
         body: json.encode(body),
       );
 
+      print(response.body);
+
       if (response.statusCode == 200) {
         var data = json.decode(response.body);
         return TagNumberModel.fromJson(data);

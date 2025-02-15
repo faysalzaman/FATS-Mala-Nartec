@@ -16,6 +16,7 @@ import 'package:mime/mime.dart';
 
 class SaveTagServices {
   static Future<void> saveTag(
+    BuildContext context,
     int tblAssetMasterEncodeAssetCaptureID,
     String majorCategory,
     String majorCategoryDescription,
@@ -163,18 +164,41 @@ class SaveTagServices {
         (response) {
           if (response.statusCode == 200 || response.statusCode == 201) {
             print(response.statusCode);
-            DeleteTagServices.deleteTag(tagNo);
 
-            Get.offAll(const HomeScreen());
-            Get.snackbar(
-              "Success",
-              "Tag Verified Successfully",
-              backgroundColor: Colors.green,
-              colorText: Colors.white,
-              snackPosition: SnackPosition.BOTTOM,
-            );
+            DeleteTagServices.deleteTag(tagNo).then((value) {
+              Navigator.of(context).pop();
+
+              Future.delayed(const Duration(seconds: 1), () {
+                Get.offAll(const HomeScreen());
+              });
+
+              Get.snackbar(
+                "Success",
+                "Tag Verified Successfully",
+                backgroundColor: Colors.green,
+                colorText: Colors.white,
+                snackPosition: SnackPosition.BOTTOM,
+              );
+            }).onError((error, stackTrace) {
+              print(error);
+              Navigator.of(context).pop();
+              Get.snackbar(
+                "Error",
+                "Failed to Verify Tag",
+                snackPosition: SnackPosition.BOTTOM,
+                backgroundColor: Colors.red,
+              );
+            });
           } else {
             print(response.statusCode);
+            Navigator.of(context).pop();
+            Get.snackbar(
+              "Error",
+              "Failed to Verify Tag",
+              snackPosition: SnackPosition.BOTTOM,
+              backgroundColor: Colors.red,
+              colorText: Colors.white,
+            );
           }
         },
       );
