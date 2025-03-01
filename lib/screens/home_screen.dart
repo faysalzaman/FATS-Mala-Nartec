@@ -5,20 +5,14 @@ import 'dart:io';
 import 'package:mala_fats/constants.dart';
 import 'package:mala_fats/screens/AssetByCustodian/asset_by_custodian_screen.dart';
 import 'package:mala_fats/screens/AssetByLocation/asset_by_location_screen.dart';
-import 'package:mala_fats/screens/AssetTransaction/asset_inventory/asset_inventory_screen.dart';
-import 'package:mala_fats/screens/AssetTransaction/asset_movement/asset_movement_screen.dart';
-import 'package:mala_fats/screens/AssetTransaction/asset_transaction.dart';
 import 'package:mala_fats/screens/AssetVarification/asset_tag_information.dart';
-import 'package:mala_fats/screens/NewAssetGenerateTag/new_asset_generate_tag_screen.dart';
 import 'package:mala_fats/screens/VarifiedAsset/varified_asset_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'AssetCapture/asset_location_form_screen.dart';
 import 'package:mala_fats/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import 'AssetCapture/asset_location_form_screen.dart';
-import 'AssetForPrinting/AssetForPrintingScreen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
